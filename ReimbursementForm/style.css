@@ -1,0 +1,110 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    min-width: 100%;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+body, table, td, div, p, a {
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    line-height: 100%;
+}
+
+table, td {
+    border-collapse: collapse !important;
+    border-spacing: 0;
+}
+
+img {
+    border: 0;
+    line-height: 100%;
+    outline: none;
+    text-decoration: none;
+    -ms-interpolation-mode: bicubic;
+}
+
+#outlook a {
+    padding: 0;
+}
+
+.ReadMsgBody {
+    width: 100%;
+}
+
+.ExternalClass {
+    width: 100%;
+}
+
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+        line-height: 100%;
+    }
+
+/* Rounded corners for advanced mail clients only */
+@media all and (min-width: 560px) {
+    .container {
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+    }
+}
+
+/* Set color for auto links (addresses, dates, etc.) */
+a, a:hover {
+    color: #127DB3;
+}
+
+.footer a, .footer a:hover {
+    color: #999999;
+}
+
+
+button {
+    background: #003767;
+    color: #fff;
+    border: none;
+    position: relative;
+    height: 60px;
+    font-size: 1.6em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+}
+
+    button:hover {
+        background: #fff;
+        color: #003767;
+    }
+
+    button:before, button:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #003767;
+        transition: 400ms ease all;
+    }
+
+    button:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+    }
+
+    button:hover:before, button:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+    }
+
+.social a {
+    padding: 0 .5em;
+    color: black;
+}
+

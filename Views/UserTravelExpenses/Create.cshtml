@@ -1,0 +1,332 @@
+﻿@model List<ReimbursementVoucherForm.Models.TRF_UserTravelExpense>
+
+@using (Html.BeginForm("Create", "UserTravelExpenses", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="alert alert-dismissible alert-primary">
+            <h3 class="alert-heading" style="font-weight: bold; text-align:center">
+                Reimbursement Voucher for Faculty or Staff Travel
+            </h3>
+        </div>
+        <form id="mail-pdf">
+            <div class="row">
+                <div class="col">
+                    <label style="text-align:left;">If any personal travel included in the above expenses, please indicate amount of personal travel.  If any expenses were paid via a Westminster credit card, do not include them on this form, but include a copy of the signed Travel Request and PO to the monthly credit card payment request. </label>
+                </div>
+            </div>
+            <br />
+            <strong> <i style="font-size:28px; color:#000080" class="fa">&#xf2be;</i> <label style="color:#000080"> Requester's Information:</label>  </strong>
+
+            <div class="row">
+                <div class="col">
+                    <input id="first_name" type="text" name="User.FirstName"  class="form-control" required data-val="true" data-val-required="Please enter your first name." />
+                    <span class="text-danger field-validation-error" data-valmsg-for="User.FirstName" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> First Name</small>
+                </div>
+                <div class="col">
+                    <input name="User.LastName" type="text" class="form-control" data-val="true" data-val-required= "Please enter your last name." required />
+                    <span class="text-danger field-validation-error" data-valmsg-for="User.LastName" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Last Name</small>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="email" name="User.Email" class="form-control" id="email" required data-val="true" data-val-required="Please enter your email." />
+                <span class="text-danger field-validation-error" data-valmsg-for="User.Email" data-valmsg-replace="true"></span>
+                <small class="form-text text-muted"> Email </small>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" name="User.UserType" id="Department_type" required data-val="true" data-val-required="Please select your user type." >
+                    <option value="" disabled selected> Select One... </option>
+                    <option> Faculty </option>
+                    <option> Staff</option>
+                </select>
+                <span class="text-danger field-validation-error" data-valmsg-for="User.UserType" data-valmsg-replace="true"></span>
+                <small class="form-text text-muted"> Faculty or Staff</small>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="departchair_name" name="User.SupervisorName" type="text" class="form-control" required data-val="true" data-val-required="Please enter the name of your supervisor."  />
+                    <span class="text-danger field-validation-error" data-valmsg-for="User.SupervisorName" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Last name of requester's supervisor / Department chair</small>
+                </div>
+                <div class="col">
+                    <select class="form-control" name="User.Department" id="Department_type" data-val="true" data-val-required="Please select your department."  required>
+                        <option value="" disabled selected> Select One... </option>
+                        <option> Academic - Deans </option>
+                        <option> Academic - Humanities </option>
+                        <option> Academic  - Natural and Mathematical Sciences</option>
+                        <option> Academic  - Social Sciences </option>
+                        <option>  Academic  - Professional Advancement Leadership  </option>
+                        <option>  Admissions and Student Financial Planning </option>
+                        <option> Alumni Office </option>
+                        <option>  Athletics   </option>
+                        <option> Business Office </option>
+                        <option>  Campus Security </option>
+                        <option> Career Development  </option>
+                        <option> Development Office</option>
+                        <option> Dining Services </option>
+                        <option> Human Resources</option>
+                        <option>Internships     </option>
+                        <option> IT Services  </option>
+                        <option>  Learning Opportunities Center </option>
+                        <option> Mail and Printing Services </option>
+                        <option>  Marketing </option>
+                        <option> Plant Operations  </option>
+                        <option> President's Office </option>
+                        <option>  Reeves Library </option>
+                        <option> Registrar's Office </option>
+                        <option> Student Activities </option>
+                        <option> The Wellness Center </option>
+                        <option> National Churchill Museum </option>
+                    </select>
+                    <span class="text-danger field-validation-error" data-valmsg-for="User.Department" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Department </small>
+                </div>
+            </div>
+            <br />
+            <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 100%; position: relative;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <br />
+            <strong> <label style="color:#000080"><i style="font-size:28px;color:#000080" class="fa">&#xf072;</i> Travel Information:</label> </strong>
+            <div class="row">
+                <div class="col">
+                    <input id="address" name="TravelAddress.Address" type="text" class="form-control" required data-val="true" data-val-required="Please enter your destination address."  />
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.Address" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted">Travel Destination Address</small>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-3">
+                    <input id="city" name="TravelAddress.City" type="text" class="form-control" required data-val="true" data-val-required="Please enter your destination city." />
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.City" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> City</small>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" name="TravelAddress.State" id="states" required data-val="true" data-val-required="Please select the state.">
+                        <option value="" disabled selected> Select State... </option>
+                        <option value="AL">Alabama (AL)</option>
+                        <option value="AK">Alaska (AK)</option>
+                        <option value="AZ">Arizona (AZ)</option>
+                        <option value="AR">Arkansas (AR)</option>
+                        <option value="CA">California (CA)</option>
+                        <option value="CO">Colorado (CO)</option>
+                        <option value="CT">Connecticut (CT)</option>
+                        <option value="DE">Delaware (DE)</option>
+                        <option value="DC">District Of Columbia (DC)</option>
+                        <option value="FL">Florida (FL)</option>
+                        <option value="GA">Georgia (GA)</option>
+                        <option value="HI">Hawaii (HI)</option>
+                        <option value="ID">Idaho (ID)</option>
+                        <option value="IL">Illinois (IL)</option>
+                        <option value="IN">Indiana (IN)</option>
+                        <option value="IA">Iowa (IA)</option>
+                        <option value="KS">Kansas (KS)</option>
+                        <option value="KY">Kentucky (KY)</option>
+                        <option value="LA">Louisiana (LA)</option>
+                        <option value="ME">Maine (ME)</option>
+                        <option value="MD">Maryland (MD)</option>
+                        <option value="MA">Massachusetts (MA)</option>
+                        <option value="MI">Michigan (MI)</option>
+                        <option value="MN">Minnesota (MN)</option>
+                        <option value="MS">Mississippi (MS)</option>
+                        <option value="MO">Missouri (MO)</option>
+                        <option value="MT">Montana (MT)</option>
+                        <option value="NE">Nebraska (NE)</option>
+                        <option value="NV">Nevada (NV)</option>
+                        <option value="NH">New Hampshire (NH)</option>
+                        <option value="NJ">New Jersey (NJ)</option>
+                        <option value="NM">New Mexico (NM)</option>
+                        <option value="NY">New York (NY)</option>
+                        <option value="NC">North Carolina (NC)</option>
+                        <option value="ND">North Dakota (ND)</option>
+                        <option value="OH">Ohio (OH)</option>
+                        <option value="OK">Oklahoma (OK)</option>
+                        <option value="OR">Oregon (OR)</option>
+                        <option value="PA">Pennsylvania (PA)</option>
+                        <option value="RI">Rhode Island (RI)</option>
+                        <option value="SC">South Carolina (SC)</option>
+                        <option value="SD">South Dakota (SD)</option>
+                        <option value="TN">Tennessee (TN)</option>
+                        <option value="TX">Texas (TX)</option>
+                        <option value="UT">Utah (UT)</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                        <option value="Others">-------</option>
+                    </select>
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.State" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> State</small>
+                </div>
+                <div class="col-sm-3">
+                    <input id="Country" name="TravelAddress.Country" type="text" class="form-control" required data-val="true" data-val-required="Please enter your destination country." />
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.Country" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Country</small>
+                </div>
+                <div class="col-sm-3">
+                    <input id="zip_code" name="TravelAddress.ZipCode" type="number" class="form-control" required data-val="true" data-val-required="Please enter the Zip Code." />
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.ZipCode" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Zip Code</small>
+                </div>
+            </div>
+            <hr />
+            <strong> <label><i style="font-size:24px" class="fa">&#xf073;</i> Travel Dates:</label> </strong>
+            <div class="row">
+                <div class="col">
+                    <input id="travelstart_date" name="TravelAddress.DepartureDate" type="date" class="form-control" required data-val="true" data-val-required="Please enter your departure date." />
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.DepartureDate" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Departure (Start Date)</small>
+                </div>
+                <div class="col">
+                    <input id="travelend_date" name="TravelAddress.ArrivalDate" type="date" class="form-control" required data-val="true" data-val-required="Please enter your arrival date." />
+                    <span class="text-danger field-validation-error" data-valmsg-for="TravelAddress.ArrivalDate" data-valmsg-replace="true"></span>
+                    <small class="form-text text-muted"> Arrival (End Date)</small>
+                </div>
+            </div>
+            <br />
+            <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 100%; position: relative;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <br />
+            <strong><label for="comment"><i style="font-size:24px" class="fa">&#xf09d;</i> Travel Expenses:</label> </strong>
+            <div class="form-group">
+                <input type="number" class="form-control" id="account_number" name="User.AccountCode" required data-val="true" data-val-required="Please provide the account number to use for charges." />
+                <span class="text-danger field-validation-error" data-valmsg-for="User.AccountCode" data-valmsg-replace="true"></span>
+                <small class="form-text text-muted"> Account number to use for charges </small>
+            </div>
+            <hr />
+            <center>
+                <div class="row">
+                    <div class="col-4">
+                        <label style="font-size:14px; color:#003767;  font-weight: bold; font-size:16px">Expense Type</label>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-2">
+
+                        <label style="font-size:14px; color:#003767;  font-weight: bold; font-size:16px"> Amount</label>
+
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                </div>
+            </center>
+
+            <hr />
+            @for (int i = 0; i < ((IEnumerable<dynamic>)ViewBag.ExpenseID).Count(); i++)
+            {
+                <div class="row">
+                    <div class="col-4">
+                        @if (i == 0)
+                        {
+                            @Html.DropDownListFor(model => model[i].ExpenseID, new SelectList(ViewBag.ExpenseID, "ExpenseID", "ExpenseType", "74c4127d-59e0-4751-903e-4ef765aac395"),new { @class = "form-control", @readonly = true })
+                        }
+                        @if (i == 1)
+                            {
+                                @Html.DropDownListFor(model => model[i].ExpenseID, new SelectList(ViewBag.ExpenseID, "ExpenseID", "ExpenseType", "758a5fa1-0f7d-4173-bf30-798a82d7fa77"), new { @class = "form-control", @readonly = true })
+                            }
+                         @if (i == 2)
+                            {
+                                @Html.DropDownListFor(model => model[i].ExpenseID, new SelectList(ViewBag.ExpenseID, "ExpenseID", "ExpenseType", "b35fb5ee-9459-4362-b968-8bb4325e3d25"), new { @class = "form-control", @readonly = true })
+                            }
+                         @if (i == 3)
+                            {
+                                @Html.DropDownListFor(model => model[i].ExpenseID, new SelectList(ViewBag.ExpenseID, "ExpenseID", "ExpenseType", "a9f6d7b2-367d-4cf6-b806-a5eb146e4269"), new { @class = "form-control", @readonly = true })
+                            }
+                        @if (i == 4)
+                            {
+                                @Html.DropDownListFor(model => model[i].ExpenseID, new SelectList(ViewBag.ExpenseID, "ExpenseID", "ExpenseType", "d0d30f46-8670-45cb-b4a8-d499fdd1ffc3"), new { @class = "form-control", @readonly = true })
+                            }
+                         @if (i == 5)
+                            {
+                                @Html.DropDownListFor(model => model[i].ExpenseID, new SelectList(ViewBag.ExpenseID, "ExpenseID", "ExpenseType", "88e6107b-ee04-4b3b-b226-e01efff1b202"), new { @class = "form-control", @readonly = true })
+                            }
+
+                        </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i style="font-size:24px" class="fa">&#xf155;</i></span>
+                            </div>
+                            @Html.EditorFor(model => model[i].Amount, new { htmlAttributes = new { placeholder = "0.00", value = "0.00", onchange = "setTwoNumberDecimal(this)", step = "0.01", @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input class="form-control" type="file" name="upload" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <br />
+            }
+            <hr />
+            <strong> <label>Notes/Comments:</label> </strong>
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control" name="User.notescomments" rows="2" id="comment" style="resize:none"></textarea>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <center>
+                        <strong><input type="checkbox" name="checkbox"  id="agree" required data-val="true" data-val-required="Please check this box to ensure the information provided is accurate to the best of your knowledge." /> I certify that the information I provide is accurate to the best of my knowledge. </strong>
+                        <span class="text-danger field-validation-error" data-valmsg-for="checkbox" data-valmsg-replace="true"></span>
+                    </center>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <center>
+                        <strong><label style="color:red;" /> Please check your inbox to view a copy of this voucher. Thank you! </strong>
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <center>
+                        <input type="submit" value="Click here to submit" style="display: block;
+    width: 100%;
+    border: none;
+    background-color: #013668;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;" />
+
+                    </center>
+                </div>
+            </div>
+            <br />
+
+        </form>
+
+    </div>
+
+
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/JS/JavaScript.js"></script>
